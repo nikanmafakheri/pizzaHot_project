@@ -1,0 +1,91 @@
+{% extends "order/base.html" %}
+{%load static%}
+{%block content%}
+<!doctype html>
+<html>
+  <body>
+    <div class = "container">
+        {%load widget_tweaks %}
+        <h2>{{note}}</h2>
+
+        {% if createdpizza_pk%}
+    
+        <a href = "{% url 'edit' createdpizza_pk %}" > Edit your pizza</a>
+
+        {% endif %}
+
+        <form action = "{% url 'order' %}" method = "post" >
+            {% csrf_token %}
+            {%for field in OrderForm%}
+            <div class = "form-group">
+                {{ field.errors }}
+                {{ field.label_tag }}
+                {% comment %} {% render_field field class ="form-control" %} {% endcomment %}
+                {% render_field field attrs="class:form-control" %}
+            </div>
+            {% endfor %}
+            <input type = "submit" value = "Order pizza">
+        </form>
+        <br></br>
+
+
+        <h2>want more than one pizza?</h2>
+        <form action = "{% url 'pizzas' %}" method = "get">
+            {{ multipleForm }}
+            <input type = "submit" value = "Order pizzas">
+        </form>
+    </div>
+{%endblock content%}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} 
+<!DOCTYPE html>
+<html>
+    <h1>Menu</h1>
+
+    <h2>{{note}}</h2>
+
+    {% if createdpizza_pk%}
+    
+    <a href = "{% url 'edit' createdpizza_pk %}" > Edit your pizza</a>
+
+    {% endif %}
+
+    <form action = "{% url 'order' %}" method = "post" > {% csrf_token %}
+    {{ OrderForm.as_p}}
+    <input type = "submit" value = "Order pizza">
+
+    </form>
+    <br></br>
+
+
+    <h2>want more than one pizza?</h2>
+    <form action = "{% url 'pizzas' %}" method = "get">
+        {{ multipleForm }}
+        <input type = "submit" value = "Order pizzas">
+    </form>
+    
+</html> {% endcomment %}

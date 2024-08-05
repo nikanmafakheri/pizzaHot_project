@@ -1,0 +1,21 @@
+{% extends "order/base.html" %}
+{%load static%}
+{%block content%}
+<!DOCTYPE html>
+<html>
+  <div class = "container">
+  <h1>Order multiple Pizza's</h1>
+  <h2>{{note}}</h2>
+  <form action = "{% url 'pizzas' %}" method = "post">
+    {% csrf_token %}
+
+    {{ formset.management_form }}
+    {% for form in formset %}
+      {{form}}
+      <br></br>
+    {% endfor %}
+    <input type = "submit" value = "Order Pizzas">
+  </form>
+</div>
+</html>
+{%endblock content%}
