@@ -1,0 +1,25 @@
+{% extends "order/base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Sign Up</h2>
+  {% if form.errors %}
+  <div class="alert alert-danger">
+    <ul>
+      {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+          <li><strong>{{ field }}:</strong> {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+  
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+</div>
+{% endblock content %}
+

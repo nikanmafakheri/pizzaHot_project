@@ -1,23 +1,19 @@
-{%extends "order/base.html"%}
-{%block content%}
-{%load static%}
+{% extends "order/base.html" %}
 
-  <div class = "text-center">
-    {%load static %}
-    <img src = "{% static 'time.jpg'%}" class = "img-fluid" alt = "Pizza Hot" width = "100%" height = "100%">
-  </div>
-<footer>
-  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #238a44">
-    <div class="b">
-      <a class="navbar-brand" href="{% url 'home' %}">Pizza Hot</a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'order' %}">Order Now<span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-</footer>
+{% block content %}
+<div class="container text-center mt-5">
+  <h1 class="mb-4">Welcome to Pizza Hot!</h1>
+  <p class="lead mb-5">The best place to order your favorite pizzas online.</p>
+  
+  {% if user.is_authenticated %}
+    <p class="mb-4">Hello, {{ user.username }}! Ready to order some pizza?</p>
+    <a href="{% url 'order' %}" class="btn btn-primary btn-lg">Order Now</a>
+    <br>
+    <a href="{% url 'logout' %}" class="btn btn-secondary btn-lg mt-3">Logout</a>
+  {% else %}
+    <p class="mb-4">Please sign in to place your order.</p>
+    <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
+    <a href="{% url 'signup' %}" class="btn btn-success btn-lg">Signup</a>
+  {% endif %}
+</div>
 {% endblock content %}
