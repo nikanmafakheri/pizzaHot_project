@@ -1,21 +1,33 @@
 {% extends "order/base.html" %}
-{%load static%}
-{%block content%}
-<!DOCTYPE html>
-<html>
-  <div class = "container">
-  <h1>Order multiple Pizza's</h1>
-  <h2>{{note}}</h2>
-  <form action = "{% url 'pizzas' %}" method = "post">
-    {% csrf_token %}
+{% load static %}
 
-    {{ formset.management_form }}
-    {% for form in formset %}
-      {{form}}
-      <br></br>
-    {% endfor %}
-    <input type = "submit" value = "Order Pizzas">
-  </form>
-</div>
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Multiple Pizzas</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Order Multiple Pizzas</h1>
+        <p class="note">{{ note }}</p>
+        
+        <form action="{% url 'pizzas' %}" method="post">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            
+            {% for form in formset %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+            {% endfor %}
+            
+            <button type="submit">Order Pizzas</button>
+        </form>
+    </div>
+</body>
 </html>
-{%endblock content%}
+{% endblock content %}

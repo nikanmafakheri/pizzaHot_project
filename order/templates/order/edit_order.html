@@ -1,20 +1,29 @@
-<!DOCTYPE html>
 {% extends "order/base.html" %}
-{%load static%}
-{%block content%}
-<html>
-  <body>
-    <div class = "container">
-    <h1>Edit your order</h1>
-    <h2>{{note}}</h2>
-    
-    <form action = "{% url 'edit' pizza.id %}" method = "post"> 
-      {% csrf_token %}
-      {{ OrderForm }}
-      <input type = "submit" value = "Edit pizza">
-    </form>
+{% load static %}
 
-  </body>
-  </div>
-{%endblock content%}  
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Order</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+      <h1>Edit Your Order</h1>
+      <p class="note">{{ note }}</p>
+      
+      <form action="{% url 'edit' pizza.id %}" method="post"> 
+        {% csrf_token %}
+        <div class="form-group">
+          {{ OrderForm.as_p }}
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+</body>
 </html>
+{% endblock content %}
+
